@@ -1,4 +1,4 @@
-# Sinatra::JSONAPI
+# Sinatra::JSONAPI [![](https://secure.travis-ci.org/kyledrake/sinatra-jsonapi.png)](http://travis-ci.org/kyledrake/sinatra-jsonapi)
 
 This is an extension for Sinatra that makes the Base class return JSON for 404 and 500 errors, and gives you api\_response and api\_error for quick JSON responses.
 
