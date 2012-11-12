@@ -8,8 +8,8 @@ Gem::Specification.new do |gem|
   gem.version       = Sinatra::JSONAPI::VERSION
   gem.authors       = ["Kyle Drake"]
   gem.email         = ["kyledrake@gmail.com"]
-  gem.description   = %q{TODO: Write a gem description}
-  gem.summary       = %q{TODO: Write a gem summary}
+  gem.description   = %q{Turns a Sinatra Base class into a JSON api}
+  gem.summary       = %q{This gem makes it easy to make a JSON api by converting some HTML-esque things in Sinatra into JSON}
   gem.homepage      = ""
 
   gem.files         = `git ls-files`.split($/)
