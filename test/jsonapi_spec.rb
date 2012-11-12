@@ -29,7 +29,10 @@ describe Sinatra::JSONAPI do
     }
     get '/notfound'
     last_response.body.wont_equal '<h1>Not Found</h1>'
-    last_response.body.must_equal(as_json(error: {type: 'not_found', message: 'The requested method was not found: /notfound'}))
+    
+    error_resp = {:error => {:type => 'not_found', :message => 'The requested method was not found: /notfound'}}
+    
+    last_response.body.must_equal as_json(error_resp)
   end
   
   it 'should return generic 500 JSON on uncaught exception' do
@@ -42,9 +45,9 @@ describe Sinatra::JSONAPI do
 
     get '/error'
 
-    error_msg = {error: {type: 'unexpected_error', message: 'An unexpected error has occured, please try your request again later'}}
+    error_resp = {:error => {:type => 'unexpected_error', :message => 'An unexpected error has occured, please try your request again later'}}
 
-    last_response.body.must_equal error_msg.to_json
+    last_response.body.must_equal as_json(error_resp)
   end
   
   it 'should return custom 500 JSON error' do
@@ -55,32 +58,34 @@ describe Sinatra::JSONAPI do
     }
 
     get '/custom'
-    last_response.body.must_equal(as_json(error: {type: 'wrong_argument', message: 'no arguments'}))
+    last_response.body.must_equal(as_json(:error => {:type => 'wrong_argument', :message => 'no arguments'}))
   end
 
   it 'should return hello world json' do
 
     mock_app {
       get '/hello' do
-        api_response response: 'hello'
+        api_response(:response => 'hello')
       end
     }
 
     get '/hello'
-    last_response.body.must_equal(as_json(response: 'hello'))
+    last_response.body.must_equal(as_json(:response => 'hello'))
   end
 
   it 'should return jsonp when requested' do
     mock_app {
       get '/' do
-        api_response response: 'hello'
+        api_response(:response => 'hello')
       end
     }
 
     get '/?callback=abc123'
 
+    expected_resp = {:response => 'hello'}
+
     expected = "abc123({\n"+
-               "  #{as_json(response: 'hello')}\n"+
+               "  #{as_json expected_resp}\n"+
                "})"
 
     last_response.body.must_equal expected

@@ -32,7 +32,7 @@ module Sinatra
       
       app.helpers do
         def api_error(type, message)
-          payload = {error: {type: type, message: message}}
+          payload = {:error => {:type => type, :message => message}}
           halt process_payload(payload)
         end
 
