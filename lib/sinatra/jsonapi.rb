@@ -1,9 +1,10 @@
 require 'sinatra'
 require 'json'
-require './lib/sinatra/jsonapi/version.rb'
 
 module Sinatra
   module JSONAPI
+    VERSION = "0.0.3"
+
     def self.registered(app)
       app.disable :show_exceptions
       app.disable :raise_errors
@@ -29,7 +30,7 @@ module Sinatra
 
         api_error 'not_found', "The requested method was not found: #{request.path}"
       end
-      
+
       app.helpers do
         def api_error(type, message)
           payload = {:error => {:type => type, :message => message}}
