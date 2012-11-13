@@ -5,7 +5,7 @@ require 'sinatra/jsonapi/version'
 
 Gem::Specification.new do |gem|
   gem.name          = "sinatra-jsonapi"
-  gem.version       = Sinatra::JSONAPI::VERSION
+  gem.version       = '0.0.3'
   gem.authors       = ["Kyle Drake"]
   gem.email         = ["kyledrake@gmail.com"]
   gem.description   = %q{Turns a Sinatra Base class into a JSON api}
