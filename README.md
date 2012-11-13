@@ -37,14 +37,14 @@ For classy apps:
       get '/hello' do
         api_response response: 'world!'
       end
-      
+
       # Returns:
       # {"response":"world!"}
-      
+
       get '/break' do
         api_error :your_error_type, 'human readable version of error message'
       end
-      
+
       # Returns:
       # {"error":{"error_type":"your_error_type", "message":"human readable version of your error message"}}
     end
